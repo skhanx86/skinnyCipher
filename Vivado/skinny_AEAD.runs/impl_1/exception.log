@@ -1,0 +1,4 @@
+ERROR: Exception caught trying to open file C:\Users\saini\OneDrive\Desktop\skinny_AEAD\skinny_AEAD.runs\impl_1/runme.log
+	Exception name: Error
+	Exception error code: 70
+	Exception message: Permission denied

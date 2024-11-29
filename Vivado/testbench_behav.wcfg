@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,000.000 ns"></ZoomEndTime>
+      <Cursor1Time time="179.024 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="214"></NameColumnWidth>
+      <ValueColumnWidth column_width="264"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="13" />
+   <wvobject fp_name="/testbench/top/clock" type="logic">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/current_state" type="array">
+      <obj_property name="ElementShortName">current_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">current_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/next_state" type="array">
+      <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/reg_plaintext" type="array">
+      <obj_property name="ElementShortName">reg_plaintext[127:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_plaintext[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/reg_ciphertext" type="array">
+      <obj_property name="ElementShortName">reg_ciphertext[127:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_ciphertext[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/reg_tweakey" type="array">
+      <obj_property name="ElementShortName">reg_tweakey[2:0][127:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_tweakey[2:0][127:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/isLoadDone" type="logic">
+      <obj_property name="ElementShortName">isLoadDone</obj_property>
+      <obj_property name="ObjectShortName">isLoadDone</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/reg_tweakey" type="array">
+      <obj_property name="ElementShortName">reg_tweakey[2:0][127:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_tweakey[2:0][127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/isEncDone" type="logic">
+      <obj_property name="ElementShortName">isEncDone</obj_property>
+      <obj_property name="ObjectShortName">isEncDone</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/round_counter" type="array">
+      <obj_property name="ElementShortName">round_counter[7:0]</obj_property>
+      <obj_property name="ObjectShortName">round_counter[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+</wave_config>
