@@ -50,9 +50,9 @@ module testbench;
  
 
         // Wait for encryption to complete
-//        wait(valid);
+        wait(valid);
 
-        #6000;
+//        #6000;
         // Check if the output matches the expected ciphertext
         if (valid) begin
             $display("Test Passed: Ciphertext matches the expected value.");
