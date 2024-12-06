@@ -3,8 +3,8 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Thu Nov 28 19:53:15 2024
-# Process ID         : 19332
+# Start of session at: Thu Dec  5 19:35:23 2024
+# Process ID         : 95572
 # Current directory  : C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.runs/impl_1
 # Command line       : vivado.exe -log skinny_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source skinny_top.tcl -notrace
 # Log file           : C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.runs/impl_1/skinny_top.vdi
@@ -17,8 +17,8 @@
 # CPU Physical cores : 12
 # CPU Logical cores  : 16
 # Host memory        : 16854 MB
-# Swap memory        : 9866 MB
-# Total Virtual      : 26721 MB
-# Available Virtual  : 3965 MB
+# Swap memory        : 14181 MB
+# Total Virtual      : 31036 MB
+# Available Virtual  : 3734 MB
 #-----------------------------------------------------------
 source skinny_top.tcl -notrace

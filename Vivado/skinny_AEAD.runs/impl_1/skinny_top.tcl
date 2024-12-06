@@ -108,7 +108,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 4
-  set_param synth.incrementalSynthesisCache C:/Users/saini/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-61896-Nik-PC/incrSyn
+  set_param synth.incrementalSynthesisCache C:/Users/saini/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-85388-Nik-PC/incrSyn
   set_param checkpoint.writeSynthRtdsInDcp 1
   set_param runs.launchOptions { -jobs 8  }
   open_checkpoint skinny_top_routed.dcp

@@ -3,8 +3,8 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Thu Nov 28 19:49:40 2024
-# Process ID         : 54904
+# Start of session at: Thu Dec  5 19:32:48 2024
+# Process ID         : 69340
 # Current directory  : C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.runs/synth_1
 # Command line       : vivado.exe -log skinny_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source skinny_top.tcl
 # Log file           : C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.runs/synth_1/skinny_top.vds
@@ -17,97 +17,97 @@
 # CPU Physical cores : 12
 # CPU Logical cores  : 16
 # Host memory        : 16854 MB
-# Swap memory        : 9866 MB
-# Total Virtual      : 26721 MB
-# Available Virtual  : 3255 MB
+# Swap memory        : 14181 MB
+# Total Virtual      : 31036 MB
+# Available Virtual  : 3705 MB
 #-----------------------------------------------------------
 source skinny_top.tcl -notrace
 Command: read_checkpoint -auto_incremental -incremental C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/utils_1/imports/synth_1/testbench.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/utils_1/imports/synth_1/testbench.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
-Command: synth_design -top skinny_top -part xc7k160tffv676-3 -directive AreaOptimized_medium -control_set_opt_threshold 1
+Command: synth_design -top skinny_top -part xc7s6cpga196-1Q -directive AreaOptimized_medium -control_set_opt_threshold 1
 Starting synth_design
-Attempting to get a license for feature 'Synthesis' and/or device 'xc7k160t'
-INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k160t'
-INFO: [Device 21-403] Loading part xc7k160tffv676-3
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7s6'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7s6'
+INFO: [Device 21-403] Loading part xc7s6cpga196-1Q
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 65468
+INFO: [Synth 8-7075] Helper process launched with PID 87928
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1050.742 ; gain = 469.438
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 992.934 ; gain = 467.281
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'skinny_top' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:2]
-INFO: [Synth 8-226] default block is never used [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:123]
-WARNING: [Synth 8-567] referenced signal 'reg_expected_ciphertext' should be on the sensitivity list [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:173]
-INFO: [Synth 8-226] default block is never used [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:199]
+INFO: [Synth 8-226] default block is never used [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:124]
+WARNING: [Synth 8-567] referenced signal 'reg_expected_ciphertext' should be on the sensitivity list [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:171]
+INFO: [Synth 8-226] default block is never used [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:181]
 INFO: [Synth 8-6155] done synthesizing module 'skinny_top' (0#1) [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:2]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1161.934 ; gain = 580.629
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1105.312 ; gain = 579.660
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1161.934 ; gain = 580.629
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1105.312 ; gain = 579.660
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1161.934 ; gain = 580.629
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1105.312 ; gain = 579.660
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1161.934 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 1105.312 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Parsing XDC File [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/constrs_1/new/constraints_io.xdc]
 Finished Parsing XDC File [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/constrs_1/new/constraints_io.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/constrs_1/new/constraints_io.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/skinny_top_propImpl.xdc].
-Resolution: To avoid this warning, move constraints listed in [.Xil/skinny_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1241.562 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1173.355 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1241.562 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1173.355 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1241.562 ; gain = 660.258
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1173.355 ; gain = 647.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
-Loading part: xc7k160tffv676-3
+Loading part: xc7s6cpga196-1Q
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1241.562 ; gain = 660.258
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1173.355 ; gain = 647.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1241.562 ; gain = 660.258
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1173.355 ; gain = 647.703
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-327] inferring latch for variable 'valid_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:194]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_ciphertext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:184]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_expected_ciphertext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:220]
-WARNING: [Synth 8-327] inferring latch for variable 'isLoadDone_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:192]
-WARNING: [Synth 8-327] inferring latch for variable 'isEncDone_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:193]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_plaintext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:183]
-WARNING: [Synth 8-327] inferring latch for variable 'round_counter_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:190]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[0]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:186]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[1]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:186]
-WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[2]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:186]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_ciphertext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:189]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_expected_ciphertext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:197]
+WARNING: [Synth 8-327] inferring latch for variable 'isLoadDone_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:184]
+WARNING: [Synth 8-327] inferring latch for variable 'isEncDone_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:185]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_plaintext_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:187]
+WARNING: [Synth 8-327] inferring latch for variable 'counter_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:190]
+WARNING: [Synth 8-327] inferring latch for variable 'round_counter_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:183]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[0]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:200]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[1]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:200]
+WARNING: [Synth 8-327] inferring latch for variable 'reg_tweakey_reg[2]' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:200]
+WARNING: [Synth 8-327] inferring latch for variable 'initial_tweakey_reg' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:188]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1241.562 ; gain = 660.258
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1173.355 ; gain = 647.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input    8 Bit       Adders := 1     
+	   2 Input   33 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 2     
 +---XORs : 
 	   2 Input    128 Bit         XORs := 1     
 	   2 Input      8 Bit         XORs := 12    
@@ -116,11 +116,15 @@ Detailed RTL Component Info :
 +---Registers : 
 	                3 Bit    Registers := 1     
 +---Muxes : 
+	   2 Input  384 Bit        Muxes := 2     
+	   8 Input  384 Bit        Muxes := 2     
 	   8 Input  128 Bit        Muxes := 6     
+	   2 Input  128 Bit        Muxes := 2     
 	   8 Input    8 Bit        Muxes := 1     
-	  63 Input    6 Bit        Muxes := 1     
+	   8 Input    6 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 2     
 	   8 Input    1 Bit        Muxes := 7     
+	   2 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -128,8 +132,8 @@ Finished RTL Component Statistics
 Start Part Resource Summary
 ---------------------------------------------------------------------------------
 Part Resources:
-DSPs: 600 (col length:100)
-BRAMs: 650 (col length: RAMB18 100 RAMB36 50)
+DSPs: 10 (col length:20)
+BRAMs: 10 (col length: RAMB18 20 RAMB36 10)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
@@ -137,181 +141,55 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-3332] Sequential element (valid_reg) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[127]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[126]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[125]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[124]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[123]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[122]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[121]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[120]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[119]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[118]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[117]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[116]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[115]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[114]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[113]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[112]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[111]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[110]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[109]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[108]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[107]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[106]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[105]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[104]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[103]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[102]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[101]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[100]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[99]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[98]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[97]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[96]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[95]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[94]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[93]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[92]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[91]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[90]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[89]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[88]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[87]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[86]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[85]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[84]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[83]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[82]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[81]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[80]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[79]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[78]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[77]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[76]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[75]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[74]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[73]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[72]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[71]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[70]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[69]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[68]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[67]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[66]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[65]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[64]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[63]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[62]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[61]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[60]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[59]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[58]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[57]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[56]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[55]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[54]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[53]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[52]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[51]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[50]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[49]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[48]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[47]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[46]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[45]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[44]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[43]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[42]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[41]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[40]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[39]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[38]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[37]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[36]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[35]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[34]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[33]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[32]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[31]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[30]) is unused and will be removed from module skinny_top.
-WARNING: [Synth 8-3332] Sequential element (reg_ciphertext_reg[29]) is unused and will be removed from module skinny_top.
-INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'valid_reg__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:113]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:113]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:113]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'isLoadDone_reg__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:111]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:111]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:111]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'isEncDone_reg__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:112]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:112]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:112]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[7]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[6]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[5]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[4]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[3]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[2]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[1]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'round_counter_reg[0]__0/Q' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.srcs/sources_1/new/DUT.sv:110]
+WARNING: [Synth 8-3332] Sequential element (reg_expected_ciphertext_reg[2]) is unused and will be removed from module skinny_top.
+WARNING: [Synth 8-3332] Sequential element (reg_expected_ciphertext_reg[1]) is unused and will be removed from module skinny_top.
+WARNING: [Synth 8-3332] Sequential element (round_counter_reg[7]) is unused and will be removed from module skinny_top.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 1241.562 ; gain = 660.258
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:33 . Memory (MB): peak = 1277.055 ; gain = 751.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 ROM: Preliminary Mapping Report
-+------------+------------+---------------+----------------+
-|Module Name | RTL Object | Depth x Width | Implemented As | 
-+------------+------------+---------------+----------------+
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | s_box      | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-|skinny_top  | p_0_out    | 256x8         | LUT            | 
-+------------+------------+---------------+----------------+
++------------+-----------------+---------------+----------------+
+|Module Name | RTL Object      | Depth x Width | Implemented As | 
++------------+-----------------+---------------+----------------+
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | s_box           | 256x8         | LUT            | 
+|skinny_top  | round_constants | 64x6          | LUT            | 
+|skinny_top  | p_0_out         | 64x6          | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
+|skinny_top  | p_0_out         | 256x8         | LUT            | 
++------------+-----------------+---------------+----------------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -320,19 +198,19 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1340.324 ; gain = 759.020
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:39 . Memory (MB): peak = 1327.391 ; gain = 801.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1340.324 ; gain = 759.020
+Finished Timing Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:45 . Memory (MB): peak = 1458.012 ; gain = 932.359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1350.129 ; gain = 768.824
+Finished Technology Mapping : Time (s): cpu = 00:00:39 ; elapsed = 00:00:46 . Memory (MB): peak = 1458.066 ; gain = 932.414
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -350,37 +228,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -393,32 +271,48 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+-----+------+
-|      |Cell |Count |
-+------+-----+------+
-|1     |OBUF |     1|
-+------+-----+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     4|
+|2     |CARRY4 |    45|
+|3     |LUT1   |    64|
+|4     |LUT2   |   245|
+|5     |LUT3   |   288|
+|6     |LUT4   |   327|
+|7     |LUT5   |   365|
+|8     |LUT6   |   829|
+|9     |MUXF7  |    15|
+|10    |FDCE   |     4|
+|11    |LD     |  1038|
+|12    |IBUF   |    35|
+|13    |OBUF   |     1|
++------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 33 critical warnings and 664 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:27 . Memory (MB): peak = 1566.773 ; gain = 905.840
-Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:29 . Memory (MB): peak = 1566.773 ; gain = 985.469
+Synthesis finished with 0 errors, 0 critical warnings and 15 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:37 ; elapsed = 00:00:48 . Memory (MB): peak = 1575.668 ; gain = 981.973
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.668 ; gain = 1050.016
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1575.953 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1584.820 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1098 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'skinny_top' is not ideal for floorplanning, since the cellview 'skinny_top' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1581.781 ; gain = 0.000
+INFO: [Opt 31-138] Pushed 1 inverter(s) to 7 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1588.520 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 1038 instances were transformed.
+  LD => LDCE: 1031 instances
+  LD => LDCE (inverted pins: G): 7 instances
 
-Synth Design complete | Checksum: 92ad45c8
+Synth Design complete | Checksum: 7177cec7
 INFO: [Common 17-83] Releasing license: Synthesis
-24 Infos, 112 Warnings, 33 Critical Warnings and 0 Errors encountered.
+24 Infos, 17 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:34 . Memory (MB): peak = 1581.781 ; gain = 1211.125
-INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1581.781 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:46 ; elapsed = 00:00:54 . Memory (MB): peak = 1588.520 ; gain = 1218.633
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1588.520 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/saini/OneDrive/Desktop/skinny_AEAD/skinny_AEAD.runs/synth_1/skinny_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file skinny_top_utilization_synth.rpt -pb skinny_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Nov 28 19:50:18 2024...
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 19:33:46 2024...

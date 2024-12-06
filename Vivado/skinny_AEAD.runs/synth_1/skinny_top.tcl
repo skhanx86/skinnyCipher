@@ -57,12 +57,12 @@ if {$::dispatch::connected} {
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
-set_param synth.incrementalSynthesisCache C:/Users/saini/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-61896-Nik-PC/incrSyn
+set_param synth.incrementalSynthesisCache C:/Users/saini/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-85388-Nik-PC/incrSyn
 set_param checkpoint.writeSynthRtdsInDcp 1
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
-create_project -in_memory -part xc7k160tffv676-3
+create_project -in_memory -part xc7s6cpga196-1Q
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
@@ -94,7 +94,7 @@ read_checkpoint -auto_incremental -incremental C:/Users/saini/OneDrive/Desktop/s
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top skinny_top -part xc7k160tffv676-3 -directive AreaOptimized_medium -control_set_opt_threshold 1
+synth_design -top skinny_top -part xc7s6cpga196-1Q -directive AreaOptimized_medium -control_set_opt_threshold 1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
