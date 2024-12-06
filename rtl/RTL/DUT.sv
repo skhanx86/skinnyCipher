@@ -2,10 +2,14 @@
 module skinny_top (
     input               clock,
     input               reset,
-    input               start, 
-    output reg          valid 
+    input               start,
+    input [7:0]         input_plaintext,
+    input [23:0]        input_tweakey,
+    
+    // OUTPUTS 
+    output reg          done
 );
-    parameter [2:0]
+    parameter [3:0]
         IDLE        = 3'b000,
         LOAD        = 3'b001,
         DONE        = 3'b010,
@@ -24,6 +28,7 @@ module skinny_top (
     reg [7:0] round_counter;
     reg [5:0] round_constant; 
     reg [7:0] s_box[0:255];
+    reg [5:0] counter;
     
     initial begin 
         s_box[8'h00] = 8'h65; s_box[8'h01] = 8'h4c; s_box[8'h02] = 8'h6a; s_box[8'h03] = 8'h42;
@@ -107,10 +112,7 @@ module skinny_top (
     always @(posedge clock or posedge reset)begin
         if(reset)begin
             current_state <= IDLE;
-            round_counter <= 'b0;
-            isLoadDone <= 0;
-            isEncDone <= 0;
-            valid <=0;
+
         end else begin
             current_state <= next_state;
             end
@@ -118,8 +120,7 @@ module skinny_top (
     
     // FSM Logic
     always @(*) begin
-        next_state = current_state;
-//        valid = 0;
+        next_state = IDLE;
         case(current_state)
             IDLE: begin
                 if(start)
@@ -134,110 +135,89 @@ module skinny_top (
                     next_state = LOAD;
             end
             SUB_CELLS: begin
-//                valid = 1;
                 next_state = ADD_CONST;
             end
-            ADD_CONST: begin // ADD CONST
+            ADD_CONST: begin 
                 next_state = ADD_ROUND;
             end
-            ADD_ROUND: begin // ADD KEY
-//                valid = 1;
+            ADD_ROUND: begin 
                 next_state = SHIFT_ROWS;
             end
             SHIFT_ROWS: begin
-//                valid = 1;
                 next_state = MIX_COLUMNS;
             end
             MIX_COLUMNS: begin
-//                valid = 1;
                 if(!isEncDone)
                     next_state = SUB_CELLS;
                 else begin
-//                    isEncDone = 1'b1;
                     next_state = DONE;
                 end
             end
             DONE: begin
-                if(isEncDone) begin
-//                    isEncDone =1'b0;
+                if(done) begin
                     next_state = IDLE;
                 end else
                     next_state = DONE;
             end
+
             default: begin
                 next_state = IDLE;
             end
         endcase
     end
-    
+
+
+    // Potential Latch
     always@(reg_ciphertext)begin
         if(reg_expected_ciphertext == reg_ciphertext)
-            valid =1'b1;
+            done =1'b1;
          else
-            valid = 1'b0;
+            done = 1'b0;
     end
     
-//    assign valid = (reg_expected_ciphertext == reg_ciphertext)? 1'b1 :1'b0;
+
     // Datapath Logic
     always @(*) begin
-        reg_plaintext = reg_plaintext;
-        reg_ciphertext = reg_ciphertext;
-        
-        reg_tweakey[0] = reg_tweakey[0];
-        reg_tweakey[1] = reg_tweakey[1];
-        reg_tweakey[2] = reg_tweakey[2]; 
-        
-        round_counter = round_counter;
-        round_constant = round_constant;
-        isLoadDone = isLoadDone;
-        isEncDone = isEncDone;
-        valid = valid;
-        
-//        $display("Round Constant at Round %h: %h", round_counter, round_constant);
-        
-        
         case(current_state)
             IDLE: begin
                 round_counter = 0;
                 isLoadDone = 0;
                 isEncDone = 0;
-                valid = 0;
                 round_constant = 6'b0;
+                reg_plaintext = 0;
+                initial_tweakey = 0;
+                reg_ciphertext = 0;
+                counter =0;
             end
             
             LOAD: begin
             // Data from the paper
-                reg_plaintext           = 128'ha3994b66ad85a3459f44e92b08f550cb;
-//                initial_tweakey         = 383'hdf889548cfc7ea52d296339301797449ab588a34a47f1ab2dfe9c8293fbea9a5ab1afac2611012cd8cef952618c3ebe8;
-                reg_tweakey[0]          = 128'hdf889548cfc7ea52d296339301797449;
-                reg_tweakey[1]          = 128'hab588a34a47f1ab2dfe9c8293fbea9a5;
-                reg_tweakey[2]          = 128'hab1afac2611012cd8cef952618c3ebe8;
+                reg_plaintext[(127 - counter * 8) -: 8] = input_plaintext;
+                initial_tweakey[(383 - counter * 24) -: 24] = input_tweakey;
+                reg_expected_ciphertext = 128'h94ECF589E2017C601B38C6346A10DCFA;
+                isLoadDone = (counter == 4'b1111)? 1'b1:1'b0;
+                counter = counter + 1'b1;
+                reg_tweakey[0]          = initial_tweakey[383:256];
+                reg_tweakey[1]          = initial_tweakey[255:128];
+                reg_tweakey[2]          = initial_tweakey[127:0];
 
-//                reg_tweakey[0] = initial_tweakey[127:0];
-//                reg_tweakey[1] = initial_tweakey[255:128];
-//                reg_tweakey[2] = initial_tweakey[383:256];
-                
-                reg_expected_ciphertext = 128'h94ecf589e2017c601b38c6346a10dcfa;
-                reg_ciphertext = 0;
-
-                isLoadDone = 1'b1;
             end
             
             SUB_CELLS: begin
+                counter = 1'b0;
+                isLoadDone = 1'b0;
                 reg_plaintext = sub_cells(reg_plaintext);
             end
             
             ADD_CONST: begin
                  // Updating Round Constant
                 round_constant = round_constants[round_counter];
-                reg_plaintext = add_constant(reg_plaintext, round_constant);
-                $display("Round Constant at Round %d: 0x%h", round_counter, round_constant);             
-                
+                reg_plaintext = add_constant(reg_plaintext, round_constant);                         
             end
             
             ADD_ROUND: begin
                reg_plaintext = add_round_tweakey(reg_plaintext,reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]);
-               // Applying Permutation to the Tweakeys - NEEDS FIXING
+               // Applying Permutation to the Tweakeys
                reg_tweakey[0] = permute_tweakey(reg_tweakey[0]);
                reg_tweakey[1] = permute_tweakey(reg_tweakey[1]);
                reg_tweakey[2] = permute_tweakey(reg_tweakey[2]);
@@ -254,22 +234,26 @@ module skinny_top (
             MIX_COLUMNS: begin
                 reg_plaintext = mix_columns(reg_plaintext);
                 if(round_counter < 'h37) // 56 ROUNDS
-                    round_counter = round_counter + 1;
+                    round_counter = round_counter + 1'b1;
                 else
                     isEncDone =1'b1;
             end
             
 
             DONE: begin
-            
+            counter = 1'b0;
+            isLoadDone = 1'b0;
             reg_ciphertext = reg_plaintext;
-            isEncDone =1'b1;
+            isEncDone = 1'b1;
+            
             end
+
             
             default: begin
             end
        endcase
      end
+     
      
      ///////////////////////////////////////////////////////////////////////////
      //         Functions
@@ -284,10 +268,7 @@ module skinny_top (
         integer i;           // Loop index
         begin
             // Initialize padded round constant to all zeros
-//            padded_RC = {122'b0, RC};
             padded_RC = 128'b0;
-//            pad_RC = {2'b00, RC};
-            
 //             Inject the round constant into the first column of the state
             // Generate the components of the round constant matrix
             c0 = {4'b0, RC[3], RC[2], RC[1], RC[0]}; // c0 = 0‖0‖0‖0‖rc3‖rc2‖rc1‖rc0
