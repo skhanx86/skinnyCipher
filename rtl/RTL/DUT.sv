@@ -101,8 +101,7 @@ module skinny_top (
         round_constants[32] = 6'h31;    round_constants[33] = 6'h23;    round_constants[34] = 6'h06;    round_constants[35] = 6'h0D;        round_constants[36] = 6'h1B;    round_constants[37] = 6'h36;    round_constants[38] = 6'h2D;    round_constants[39] = 6'h1A;        round_constants[40] = 6'h34;    round_constants[41] = 6'h29;    round_constants[42] = 6'h12;    round_constants[43] = 6'h24;        round_constants[44] = 6'h08;    round_constants[45] = 6'h11;    round_constants[46] = 6'h22;    round_constants[47] = 6'h04;
         round_constants[48] = 6'h09;    round_constants[49] = 6'h13;    round_constants[50] = 6'h26;    round_constants[51] = 6'h0C;        round_constants[52] = 6'h19;    round_constants[53] = 6'h32;    round_constants[54] = 6'h25;    round_constants[55] = 6'h0A;        round_constants[56] = 6'h15;    round_constants[57] = 6'h2A;    round_constants[58] = 6'h14;    round_constants[59] = 6'h28;        round_constants[60] = 6'h10;    round_constants[61] = 6'h20;    
 
-
-end
+    end
     
     // Reset Logic
     always @(posedge clock or posedge reset)begin
@@ -120,7 +119,7 @@ end
     // FSM Logic
     always @(*) begin
         next_state = current_state;
-        valid = 0;
+//        valid = 0;
         case(current_state)
             IDLE: begin
                 if(start)
@@ -167,19 +166,18 @@ end
             end
             default: begin
                 next_state = IDLE;
-//                valid = 1'bZ; 
             end
         endcase
     end
     
-//    always@(reg_ciphertext)begin
-//        if(reg_expected_ciphertext == reg_ciphertext)
-//            valid =1'b1;
-//         else
-//            valid = 1'b0;
-//    end
+    always@(reg_ciphertext)begin
+        if(reg_expected_ciphertext == reg_ciphertext)
+            valid =1'b1;
+         else
+            valid = 1'b0;
+    end
     
-    assign valid = (reg_expected_ciphertext == reg_ciphertext)? 1'b1 :1'b0 ;
+//    assign valid = (reg_expected_ciphertext == reg_ciphertext)? 1'b1 :1'b0;
     // Datapath Logic
     always @(*) begin
         reg_plaintext = reg_plaintext;
@@ -210,7 +208,7 @@ end
             LOAD: begin
             // Data from the paper
                 reg_plaintext           = 128'ha3994b66ad85a3459f44e92b08f550cb;
-                initial_tweakey         = 383'hdf889548cfc7ea52d296339301797449ab588a34a47f1ab2dfe9c8293fbea9a5ab1afac2611012cd8cef952618c3ebe8;
+//                initial_tweakey         = 383'hdf889548cfc7ea52d296339301797449ab588a34a47f1ab2dfe9c8293fbea9a5ab1afac2611012cd8cef952618c3ebe8;
                 reg_tweakey[0]          = 128'hdf889548cfc7ea52d296339301797449;
                 reg_tweakey[1]          = 128'hab588a34a47f1ab2dfe9c8293fbea9a5;
                 reg_tweakey[2]          = 128'hab1afac2611012cd8cef952618c3ebe8;
@@ -232,17 +230,21 @@ end
             ADD_CONST: begin
                  // Updating Round Constant
                 round_constant = round_constants[round_counter];
-//                round_constant = {round_constant[4:0], round_constant[5] ^ round_constant[3] ^ round_constant[0]};
-//                round_constant = round_constants[round_counter];
                 reg_plaintext = add_constant(reg_plaintext, round_constant);
                 $display("Round Constant at Round %d: 0x%h", round_counter, round_constant);             
                 
             end
             
             ADD_ROUND: begin
-               {reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]} = key_update(round_counter, {reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]});
-//               reg_plaintext = add_round_key(reg_plaintext, reg_tweakey[0], reg_tweakey[1],reg_tweakey[2], round_constants[round_counter]);
-//               reg_plaintext = add_round_key(reg_plaintext, reg_tweakey[0], round_constants[round_counter]);
+               reg_plaintext = add_round_tweakey(reg_plaintext,reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]);
+               // Applying Permutation to the Tweakeys - NEEDS FIXING
+               reg_tweakey[0] = permute_tweakey(reg_tweakey[0]);
+               reg_tweakey[1] = permute_tweakey(reg_tweakey[1]);
+               reg_tweakey[2] = permute_tweakey(reg_tweakey[2]);
+               
+               reg_tweakey[1] = update_tk2(reg_tweakey[1]);
+               reg_tweakey[2] = update_tk3(reg_tweakey[2]);
+               
             end
             
             
@@ -251,15 +253,15 @@ end
             end
             MIX_COLUMNS: begin
                 reg_plaintext = mix_columns(reg_plaintext);
-                if(round_counter < 'h38) // 56 ROUNDS
+                if(round_counter < 'h37) // 56 ROUNDS
                     round_counter = round_counter + 1;
                 else
                     isEncDone =1'b1;
             end
             
-            
-            
+
             DONE: begin
+            
             reg_ciphertext = reg_plaintext;
             isEncDone =1'b1;
             end
@@ -277,59 +279,38 @@ end
         input [127:0] state; // Current state (plaintext or intermediate state)
         input [5:0] RC;      // 6-bit round constant
         reg [127:0] padded_RC; // Round constant padded to 128 bits
-        reg [7:0] pad_RC;
+//        reg [7:0] pad_RC;
+        reg [7:0] c0, c1, c2, zero; 
         integer i;           // Loop index
         begin
             // Initialize padded round constant to all zeros
+//            padded_RC = {122'b0, RC};
             padded_RC = 128'b0;
-            pad_RC = {2'b00, RC};
+//            pad_RC = {2'b00, RC};
             
-            // Inject the round constant into the first column of the state
-            for (i = 0; i < 4; i = i + 1) begin
-                padded_RC[(127 - i * 32) -: 8] = padded_RC[(127 - i * 32) -: 8] ^ pad_RC; // Inject 6-bit RC into MSBs of each byte
-            end
+//             Inject the round constant into the first column of the state
+            // Generate the components of the round constant matrix
+            c0 = {4'b0, RC[3], RC[2], RC[1], RC[0]}; // c0 = 0‖0‖0‖0‖rc3‖rc2‖rc1‖rc0
+            c1 = {6'b0, RC[5], RC[4]};              // c1 = 0‖0‖0‖0‖0‖0‖rc5‖rc4
+            c2 = 8'h02;                             // c2 = 0x02
+            zero = 8'b0;                            // Zero for padding
+    
+            // Flatten the 4x4 round constant matrix into a 128-bit padded_RC
+            padded_RC = {
+                c0, zero, zero, zero, // First row
+                c1, zero, zero, zero, // Second row
+                c2, zero, zero, zero, // Third row
+                zero, zero, zero, zero // Fourth row
+            };
+    
             
             // XOR the state with the padded round constant
             add_constant = state ^ padded_RC;
         end
     endfunction
-     
-//    // Function for Add Round Key
-//    function [127:0] add_round_key;
-//        input [127:0] state;      // Current state
-//        input [127:0] tweakey0;    // Current tweakey
-////        input [127:0] tweakey1;    // Current tweakey
-////        input [127:0] tweakey2;    // Current tweakey
-//        input [5:0] RC;           // Round constant
-//        integer i;
-//        reg [127:0] updated_state; // Updated state after applying the round constant
-//        reg [7:0] padded_RC;       // 8-bit padded round constant
-//        begin
-//            updated_state = state;
-//            padded_RC = {2'b00, RC}; // Pad RC with two leading zeros to make it 8-bit
-    
-//            // XOR the first column with the padded round constant
-//            for (i = 0; i < 4; i = i + 1) begin
-//                updated_state[(127 - 32 * i) -: 8] = state[(127 - 32 * i) -: 8] ^ padded_RC;
-//            end
-    
-//            // XOR the updated state with the tweakey
-//            add_round_key = updated_state ^ tweakey0;
-            
-////            $display("State before AddRoundKey: %h", state);
-//////            $display("Tweakey: %h", {tweakey0, tweakey1, tweakey2});
-////            $display("Round Constant: %h", padded_RC);
-////            $display("State after AddRoundKey: %h", add_round_key);
-////            $display("==============================================");
-//        end
-//    endfunction
 
-    
     ///////////////////////////////////////////////////////////////////////////
     // Initialize the S-Box at the start
-
-
-
     // Function for Sub Cells
     function [127:0] sub_cells;
         input [127:0] in_data;        // 128-bit input
@@ -353,32 +334,31 @@ end
         input [127:0] state;
         reg [127:0] result;
         begin
-            // Perform row shifting on the state
-            // Row 0: No shift
-            result[127:120] = state[127:120];
-            result[119:112] = state[119:112];
-            result[111:104] = state[111:104];
-            result[103:96]  = state[103:96];
+            // Row 0: No shift (leave it as is)
+            result[127:120] = state[127:120];  // byte 0
+            result[119:112] = state[119:112];  // byte 1
+            result[111:104] = state[111:104];  // byte 2
+            result[103:96]  = state[103:96];   // byte 3
     
-            // Row 1: Circular left shift by 1 byte
-            result[95:88]   = state[87:80];
-            result[87:80]   = state[79:72];
-            result[79:72]   = state[71:64];
-            result[71:64]   = state[95:88];
+            // Row 1: Move last byte to the first position, shift left by 1 byte
+            result[95:88]   = state[71:64];   // byte 7
+            result[87:80]   = state[95:88];    // byte 4
+            result[79:72]   = state[87:80];    // byte 5
+            result[71:64]   = state[79:72];    // byte 6
     
-            // Row 2: Circular left shift by 2 bytes
-            result[63:56]   = state[47:40];
-            result[55:48]   = state[39:32];
-            result[47:40]   = state[63:56];
-            result[39:32]   = state[55:48];
+            // Row 2: Move last two bytes to the first two positions, shift left by 2 bytes
+            result[63:56]   = state[47:40];    // byte 10
+            result[55:48]   = state[39:32];    // byte 11
+            result[47:40]   = state[63:56];    // byte 8
+            result[39:32]   = state[55:48];    // byte 9
     
-            // Row 3: Circular left shift by 3 bytes
-            result[31:24]   = state[7:0];
-            result[23:16]   = state[31:24];
-            result[15:8]    = state[23:16];
-            result[7:0]     = state[15:8];
-    
-            shift_rows = result; // Return the result
+            // Row 3: Move last three bytes to the first three positions, shift left by 3 bytes
+            result[31:24]   = state[23:16];    // byte 13
+            result[23:16]   = state[15:8];     // byte 14
+            result[15:8]    = state[7:0];      // byte 15
+            result[7:0]     = state[31:24];    // byte 12
+            
+            shift_rows = result; // Return the modified state
         end
     endfunction
     
@@ -386,29 +366,30 @@ end
     
     // Function for Mix Columns
     function [127:0] mix_columns;
-        input [127:0] state;
-        reg [31:0] column_in, column_out;
-        reg [127:0] result;
-        integer i;
+        input [127:0] state_in; // 128-bit input state
+        reg [127:0] result;     // Resulting state after mix columns
+        reg [7:0] col [3:0]; // Temporary storage for one column
+        integer i;              // Loop index
         begin
-            result = 128'b0;
+            result = 128'b0; // Initialize result
+            
             for (i = 0; i < 4; i = i + 1) begin
-                // Extract each 32-bit column
-                column_in = state[i * 32 +: 32];
+                // Extract column i
+                col[0] = state_in[(127 - i * 8) -: 8];
+                col[1] = state_in[(95 - i * 8) -: 8];
+                col[2] = state_in[(63 - i * 8) -: 8];
+                col[3] = state_in[(31 - i * 8) -: 8];
     
-                // Apply the MixColumns transformation to the column
-                column_out[31:24] = xtime(column_in[31:24]) ^ multiply_by_3(column_in[23:16]) ^ column_in[15:8] ^ column_in[7:0];
-                column_out[23:16] = column_in[31:24] ^ xtime(column_in[23:16]) ^ multiply_by_3(column_in[15:8]) ^ column_in[7:0];
-                column_out[15:8]  = column_in[31:24] ^ column_in[23:16] ^ xtime(column_in[15:8]) ^ multiply_by_3(column_in[7:0]);
-                column_out[7:0]   = multiply_by_3(column_in[31:24]) ^ column_in[23:16] ^ column_in[15:8] ^ xtime(column_in[7:0]);
-    
-                // Store the transformed column in the result
-                result[i * 32 +: 32] = column_out;
-            end
-    
-            mix_columns = result; // Return the transformed state
+                // Apply the binary matrix M to the column
+                result[(127 - i * 8) -: 8] = col[0] ^ col[2] ^ col[3]; // Row 0
+                result[(95 - i * 8) -: 8]  = col[0];                  // Row 1
+                result[(63 - i * 8) -: 8]  = col[1] ^ col[2];         // Row 2
+                result[(31 - i * 8) -: 8]  = col[0] ^ col[2];         // Row 3
+            end            
+            mix_columns = result; // Return the final state
         end
     endfunction
+
     
     // Finite Field multiplication helpers
     function [7:0] xtime(input [7:0] b);
@@ -420,62 +401,94 @@ end
      endfunction
      
      ///////////////////////////////////////////////////////////////////////////
-    
-    // Function for Key Update
-    function [383:0] key_update;
-        input [5:0] RC;
-        input [383:0] tweakey_in;
-        reg [127:0] tk0, tk1, tk2;
-        reg [127:0] tk0_new, tk1_new, tk2_new;
-        reg [5:0] round_const; // 6-bit round constant
-        integer i;
+
+    // Function to XOR state with the three tweakeys
+    function [127:0] add_round_tweakey;
+        input [127:0] IS;      // Intermediate state
+        input [127:0] TK1;     // First tweakey
+        input [127:0] TK2;     // Second tweakey
+        input [127:0] TK3;     // Third tweakey
+        reg [127:0] result;
+        integer idx;
         begin
-        
-            // Split the input tweakey into three parts
-            tk0 = tweakey_in[127:0];
-            tk1 = tweakey_in[255:128];
-            tk2 = tweakey_in[383:256];
-    
-            // Step 1: Apply permutation to tk2
-            tk2_new = permute_nibbles(tk2);
-    
-            // Step 2: XOR round constant to tk2
-            round_const = round_constants[RC]; // Example round constant (replace with dynamic value)
-            tk2_new = add_round_constant(tk2_new, round_const);
-    
-            // Step 3: Rotate tk0, tk1, tk2
-            tk0_new = tk1;
-            tk1_new = tk2_new;
-            tk2_new = tk0;
-    
-            // Combine the updated tweakey arrays
-            key_update = {tk2_new, tk1_new, tk0_new};
+            result = IS;
+            // Iterate over the byte indices of rows 0 and 1
+            for (idx = 0; idx < 8; idx = idx + 1) begin
+                result[(127 - idx * 8) -: 8] = IS[(127 - idx * 8) -: 8] ^
+                                               TK1[(127 - idx * 8) -: 8] ^
+                                               TK2[(127 - idx * 8) -: 8] ^
+                                               TK3[(127 - idx * 8) -: 8];
+            end
+            add_round_tweakey = result;
         end
     endfunction
     
-    // Permutation logic (nibble-level)
-        function [127:0] permute_nibbles(input [127:0] tweakey);
-            integer j;
-            reg [127:0] result;
-            begin
-                for (j = 0; j < 128; j = j + 4) begin
-                    result[j +: 4] = tweakey[((j + 8) % 128) +: 4]; // Example rotation of nibbles
-                end
-                permute_nibbles = result;
-            end
-        endfunction
+    ///////////////////////////////////////////////////////////////////////////  
+         
+    function [127:0] permute_tweakey; 
+        input [127:0] tweakey_in;
+        reg [3:0] PT[0:15];   // Permutation table
+        reg [127:0] tweakey_out;
+        integer i;
+        begin
+
+            // Apply the permutation PT
+            tweakey_out[127:120] = tweakey_in[55:48];  // Map position 9
+            tweakey_out[119:112] = tweakey_in[7:0];    // Map position 15
+            tweakey_out[111:104] = tweakey_in[63:56];  // Map position 8
+            tweakey_out[103:96] = tweakey_in[23:16];   // Map position 13
+            tweakey_out[95:88] = tweakey_in[47:40];    // Map position 10
+            tweakey_out[87:80] = tweakey_in[15:8];     // Map position 14
+            tweakey_out[79:72] = tweakey_in[31:24];    // Map position 12
+            tweakey_out[71:64] = tweakey_in[39:32];    // Map position 11
+            tweakey_out[63:56] = tweakey_in[127:120];  // Map position 0
+            tweakey_out[55:48] = tweakey_in[119:112];  // Map position 1
+            tweakey_out[47:40] = tweakey_in[111:104];  // Map position 2
+            tweakey_out[39:32] = tweakey_in[103:96];   // Map position 3
+            tweakey_out[31:24] = tweakey_in[95:88];    // Map position 4
+            tweakey_out[23:16] = tweakey_in[87:80];    // Map position 5
+            tweakey_out[15:8]  = tweakey_in[79:72];    // Map position 6
+            tweakey_out[7:0]   = tweakey_in[71:64];    // Map position 7
+   
+            
+            permute_tweakey = tweakey_out;
+        end
+    endfunction
     
-        // Round constant addition
-        function [127:0] add_round_constant(input [127:0] tweakey, input [5:0] round_const);
-            reg [127:0] result;
-            begin
-                result = tweakey;
-                result[3:0] = result[3:0] ^ round_const[3:0]; // XOR lower nibble of the tweakey
-                result[67:64] = result[67:64] ^ {2'b00, round_const[5:4]}; // XOR higher bits into specific positions
-                add_round_constant = result;
+    function [127:0] update_tk2;
+        input [127:0] tweakey_in; // Tweakey 2 array (16 bytes)
+        reg [127:0] result; // Result array to store updated tweakey
+        integer i;
+        begin
+            result = tweakey_in;
+            // Apply LFSR to each byte individually
+            for (i = 0; i < 8; i = i + 1) begin
+                // Update each byte based on the pattern
+                result[(127 - i * 8) -: 8] = {tweakey_in[(126 - i * 8) -: 7], tweakey_in[(127 - i * 8)] ^ tweakey_in[(125 - i * 8)]};
             end
-        endfunction
+
     
+            update_tk2 = result;  // Return the updated tweakey
+        end
+    endfunction
+    
+    
+    function [127:0] update_tk3;
+        input [127:0] tweakey_in; // Tweakey 3 array (16 bytes)
+        reg [127:0] result; // Result array to store updated tweakey
+        integer i;
+        begin
+            result = tweakey_in;
+            // Apply LFSR to each byte individually
+            for (i = 0; i < 8; i = i + 1) begin
+                // Update each byte based on the pattern
+                result[(127 - i * 8) -: 8] = {tweakey_in[(126 - i * 8)] ^ tweakey_in[(120 - i * 8)], tweakey_in[(127 - i * 8) -: 7]};
+            end            
+             
+            update_tk3 = result;  // Return the updated tweakey
+        end
+    endfunction
+        
         
 
  
