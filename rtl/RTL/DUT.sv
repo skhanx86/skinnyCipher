@@ -21,11 +21,11 @@ module skinny_top (
         
     reg [2:0] current_state, next_state;
         
-    reg [127:0] reg_plaintext, reg_ciphertext, reg_expected_ciphertext;
+    reg [127:0] reg_plaintext, reg_ciphertext, reg_expected_ciphertext, auth_data;
     reg [383:0] initial_tweakey;
     reg [127:0] reg_tweakey [2:0];
     reg isLoadDone, isEncDone;
-    reg [7:0] round_counter;
+    reg [7:0] round_counter, auth;
     reg [5:0] round_constant; 
     reg [7:0] s_box[0:255];
     reg [5:0] counter;
@@ -108,6 +108,10 @@ module skinny_top (
 
     end
     
+//    always @(posedge clock) begin
+//        auth_data <= auth_data;
+//    end
+    
     // Reset Logic
     always @(posedge clock or posedge reset)begin
         if(reset)begin
@@ -188,6 +192,8 @@ module skinny_top (
                 initial_tweakey = 0;
                 reg_ciphertext = 0;
                 counter =0;
+                auth_data = 0;
+                auth = 0;
             end
             
             LOAD: begin
@@ -195,11 +201,13 @@ module skinny_top (
                 reg_plaintext[(127 - counter * 8) -: 8] = input_plaintext;
                 initial_tweakey[(383 - counter * 24) -: 24] = input_tweakey;
                 reg_expected_ciphertext = 128'h94ECF589E2017C601B38C6346A10DCFA;
+                auth_data = 128'b0;
                 isLoadDone = (counter == 4'b1111)? 1'b1:1'b0;
                 counter = counter + 1'b1;
                 reg_tweakey[0]          = initial_tweakey[383:256];
                 reg_tweakey[1]          = initial_tweakey[255:128];
                 reg_tweakey[2]          = initial_tweakey[127:0];
+                
 
             end
             
@@ -207,16 +215,20 @@ module skinny_top (
                 counter = 1'b0;
                 isLoadDone = 1'b0;
                 reg_plaintext = sub_cells(reg_plaintext);
+                auth_data = sub_cells(auth_data);
             end
             
             ADD_CONST: begin
                  // Updating Round Constant
                 round_constant = round_constants[round_counter];
-                reg_plaintext = add_constant(reg_plaintext, round_constant);                         
+                reg_plaintext = add_constant(reg_plaintext, round_constant);    
+                auth_data = add_constant(auth_data, round_constant);
+                                     
             end
             
             ADD_ROUND: begin
                reg_plaintext = add_round_tweakey(reg_plaintext,reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]);
+               auth_data = add_round_tweakey(auth_data,reg_tweakey[0], reg_tweakey[1], reg_tweakey[2]);
                // Applying Permutation to the Tweakeys
                reg_tweakey[0] = permute_tweakey(reg_tweakey[0]);
                reg_tweakey[1] = permute_tweakey(reg_tweakey[1]);
@@ -230,9 +242,11 @@ module skinny_top (
             
             SHIFT_ROWS: begin
                 reg_plaintext = shift_rows(reg_plaintext);
+                auth_data = shift_rows(auth_data);
             end
             MIX_COLUMNS: begin
                 reg_plaintext = mix_columns(reg_plaintext);
+                auth_data = mix_columns(auth_data);
                 if(round_counter < 'h37) // 56 ROUNDS
                     round_counter = round_counter + 1'b1;
                 else
@@ -243,7 +257,9 @@ module skinny_top (
             DONE: begin
             counter = 1'b0;
             isLoadDone = 1'b0;
+            auth = aead(auth_data);
             reg_ciphertext = reg_plaintext;
+//            auth_data = auth_data ^ reg_plaintext;
             isEncDone = 1'b1;
             
             end
@@ -258,6 +274,8 @@ module skinny_top (
      ///////////////////////////////////////////////////////////////////////////
      //         Functions
      ///////////////////////////////////////////////////////////////////////////
+     
+     
      // Function to add round constant to tweakey
     function [127:0] add_constant;
         input [127:0] state; // Current state (plaintext or intermediate state)
@@ -292,6 +310,23 @@ module skinny_top (
 
     ///////////////////////////////////////////////////////////////////////////
     // Initialize the S-Box at the start
+    
+    function [7:0] aead;
+        input [127:0] in_data;        // 128-bit input
+        reg [7:0] out_data;          
+        integer i;
+        begin
+            out_data = 0;
+            // Loop through each byte in the 128-bit input (16 bytes)
+            for (i = 0; i < 16; i = i + 1) begin
+                // Apply the S-box to each byte (8 bits)
+                out_data = out_data ^ in_data[(i*8) +: 8]; 
+            end
+            // Return the substituted result
+            aead = out_data;
+        end
+     endfunction    
+     
     // Function for Sub Cells
     function [127:0] sub_cells;
         input [127:0] in_data;        // 128-bit input

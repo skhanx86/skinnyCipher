@@ -2,7 +2,7 @@
 
 module testbench;
 
-    parameter CLOCK_PERIOD = 40;
+    parameter CLOCK_PERIOD = 4;
 
     // Inputs
     reg clock;
