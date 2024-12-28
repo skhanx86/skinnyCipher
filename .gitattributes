@@ -1,0 +1,4 @@
+* linguist-detectable=true
+*.v linguist-language=Verilog
+*.sv linguist-language=Verilog
+
